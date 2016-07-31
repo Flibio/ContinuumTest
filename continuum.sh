@@ -13,8 +13,8 @@ sudo cp /usr/bin
 
 # Create a new Continuum build #
 echo $(curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" -u continuum:${CONTINUUM_TOKEN} "${TARGET}newbuild.php") >> response.json
-BUILD=$(jq '.build' response.json);
-STATUS=$(jq '.status' response.json);
+BUILD=$(jq '.build' response.json | tr -d '"');
+STATUS=$(jq '.status' response.json | tr -d '"');
 
 echo "New build status: ${STATUS}"
 echo "New build number: ${BUILD}"
