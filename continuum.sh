@@ -12,9 +12,9 @@ chmod +x ./jq
 sudo cp /usr/bin
 
 # Create a new Continuum build #
-RESPONSE = (curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" -u continuum:${CONTINUUM-TOKEN} "${TARGET}newbuild.php")
-BUILD = (jq ".build" | RESPONSE);
-STATUS = (jq ".status" | RESPONSE);
+RESPONSE = $(curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" -u continuum:${CONTINUUM-TOKEN} "${TARGET}newbuild.php")
+BUILD = $(jq ".build" | RESPONSE);
+STATUS = $(jq ".status" | RESPONSE);
 
 echo "New build status: ${STATUS}"
 
@@ -23,7 +23,7 @@ if [[ ${BUILD} -gt 0 ]]; then
     echo "Created build ${BUILD}!"
 
     # Upload the file #
-    echo (curl -v -X POST --form "file=@test.txt;filename=desired-filename.txt" --form "project=${PROJECT}" --form "build=1" -u continuum:${CONTINUUM-TOKEN} "${TARGET}upload.php")
+    echo $(curl -v -X POST --form "file=@test.txt;filename=desired-filename.txt" --form "project=${PROJECT}" --form "build=1" -u continuum:${CONTINUUM-TOKEN} "${TARGET}upload.php")
 else
     echo "Failed to create a build!"
 fi
