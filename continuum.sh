@@ -12,7 +12,7 @@ chmod +x ./jq
 sudo cp /usr/bin
 
 # Create a new Continuum build #
-echo $(curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" --data-urlencode -u continuum:${CONTINUUM_TOKEN} "${TARGET}newbuild.php") >> response.json
+echo $(curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" -u 'continuum:${CONTINUUM_TOKEN}' "${TARGET}newbuild.php") >> response.json
 echo $(cat response.json)
 BUILD=$(jq '.build' response.json | tr -d '"');
 STATUS=$(jq '.status' response.json | tr -d '"');
