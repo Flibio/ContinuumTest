@@ -24,7 +24,7 @@ if [[ ${BUILD} -gt 0 ]]; then
     echo "Created build ${BUILD}!"
 
     # Upload the file #
-    echo $(curl -v -X POST --form "file=@testfile.txt;filename=desired-filename.txt" --form "project=${PROJECT}" --form "build=${BUILD}" -u "continuum:${CONTINUUM-TOKEN}" "${TARGET}upload.php")
+    echo $(curl -v -X POST --form "file=@testfile.txt;filename=desired-filename.txt" --form "project=${PROJECT}" --form "build=${BUILD}" -u "continuum:${CONTINUUM_TOKEN}" "${TARGET}upload.php")
 else
     echo "Failed to create a build!"
 fi
