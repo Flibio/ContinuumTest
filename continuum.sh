@@ -17,6 +17,7 @@ BUILD=$(jq '.build' response.json);
 STATUS=$(jq '.status' response.json);
 
 echo "New build status: ${STATUS}"
+echo "New build number: ${BUILD}"
 
 # Check if the build was created successfully #
 if [[ ${BUILD} -gt 0 ]]; then
