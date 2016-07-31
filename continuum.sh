@@ -14,8 +14,8 @@ sudo cp /usr/bin
 # Create a new Continuum build #
 RESPONSE=$(curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" -u continuum:${CONTINUUM_TOKEN} "${TARGET}newbuild.php")
 echo ${RESPONSE}
-BUILD=$(jq '.build | "${RESPONSE}"');
-STATUS=$(jq '.status | "${RESPONSE}"');
+BUILD=$("${RESPONSE}" | jq '.build');
+STATUS=$("${RESPONSE}" | jq '.status');
 
 echo "New build status: ${STATUS}"
 
