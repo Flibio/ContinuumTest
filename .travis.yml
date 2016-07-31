@@ -1,1 +1,2 @@
+script: echo "yay"
 after_success: ./continuum.sh
