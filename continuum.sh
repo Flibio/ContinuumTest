@@ -10,7 +10,7 @@ PROJECT="ContinuumTest"
 wget http://stedolan.github.io/jq/download/linux64/jq
 chmod +x ./jq
 sudo cp /usr/bin
-echo "${TRAVIS_COMMIT}"
+
 # Create a new Continuum build #
 echo $(curl -v -X POST -d "project=${PROJECT}&commit=${TRAVIS_COMMIT}&job=${TRAVIS_JOB_ID}" -u continuum:${CONTINUUM_TOKEN} "${TARGET}newbuild.php") >> response.json
 BUILD=$(jq '.build' response.json | tr -d '"');
@@ -18,6 +18,7 @@ STATUS=$(jq '.status' response.json | tr -d '"');
 
 echo "New build status: ${STATUS}"
 echo "New build number: ${BUILD}"
+echo "Commit: ${TRAVIS_COMMIT}"
 
 # Check if the build was created successfully #
 if [[ ${BUILD} -gt 0 ]]; then
