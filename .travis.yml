@@ -1,2 +1,6 @@
+notifications:
+  email: false
 script: echo "yay"
-after_success: ./continuum.sh
+after_success:
+- 'chmod +x ./continuum.sh'
+- './continuum.sh'
