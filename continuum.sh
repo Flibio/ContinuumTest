@@ -2,6 +2,7 @@
 
 # Configuration #
 DEPLOY="${BUILD_DIR}/testfile.txt"
+FILENAME="testfile.txt"
 TARGET="http://continuum.flibio.net/api/"
 PROJECT="ContinuumTest"
 
@@ -24,7 +25,7 @@ if [[ ${BUILD} -gt 0 ]]; then
     echo "Created build ${BUILD}!"
 
     # Upload the file #
-    echo $(curl -v -X POST --form "file=@${DEPLOY};filename=desired-filename.txt" --form "project=${PROJECT}" --form "build=${BUILD}" --data-urlencode -u "continuum:${CONTINUUM_TOKEN}" "${TARGET}upload.php")
+    echo $(curl -v -X POST --form "file=@${DEPLOY};filename=${FILENAME}" --form "project=${PROJECT}" --form "build=${BUILD}" -u continuum:${CONTINUUM_TOKEN} "${TARGET}upload.php")
 else
     echo "Failed to create a build!"
 fi
